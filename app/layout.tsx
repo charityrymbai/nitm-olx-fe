@@ -1,14 +1,23 @@
-import type React from "react"
-import "@/app/globals.css"
-import { Inter } from "next/font/google"
+import type React from 'react'
+import '@/app/globals.css'
+import { Inter, Glory } from 'next/font/google'
+import { ThemeProviderWrapper } from '@/components/ThemeProviderWrapper'
 
-import { ThemeProvider } from "next-themes"
+export const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
-const inter = Inter({ subsets: ["latin"] })
+export const glory = Glory({
+  subsets: ['latin'],
+  variable: '--font-glory',
+  display: 'swap',
+})
 
 export const metadata = {
-  title: "Campus Marketplace",
-  description: "Buy and sell items within your college community",
+  title: 'Campus Marketplace',
+  description: 'Buy and sell items within your college community',
 }
 
 export default function RootLayout({
@@ -17,11 +26,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
       </body>
     </html>
   )

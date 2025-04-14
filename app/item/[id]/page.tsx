@@ -1,14 +1,19 @@
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import SiteHeader from '@/components/site-header'
+import SiteFooter from '@/components/site-footer'
+import { products } from '@/lib/data'
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import SiteHeader from "@/components/site-header"
-import SiteFooter from "@/components/site-footer"
-import { products } from "@/lib/data"
+type ProductPageProps = {
+  params: {
+    id: string
+  }
+}
 
-export default function ProductPage({ params }: { params: { id: string } }) {
+export default function ProductPage({ params }: ProductPageProps) {
   const product = products.find((p) => p.id === params.id) || products[0]
 
   return (
@@ -23,7 +28,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="grid gap-8 md:grid-cols-2">
             <div className="relative aspect-square overflow-hidden rounded-lg">
               <Image
-                src={product.image || "/placeholder.svg"}
+                src={product.image || '/placeholder.svg'}
                 alt={product.title}
                 fill
                 className="object-cover"
@@ -40,11 +45,15 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     </Badge>
                   ))}
                 </div>
-                <p className="mt-4 text-3xl font-bold text-primary">₹{product.price}</p>
+                <p className="mt-4 text-3xl font-bold text-primary">
+                  ₹{product.price}
+                </p>
               </div>
               <div>
                 <h2 className="text-xl font-semibold">Description</h2>
-                <p className="mt-2 text-muted-foreground">{product.description}</p>
+                <p className="mt-2 text-muted-foreground">
+                  {product.description}
+                </p>
               </div>
               <div>
                 <h2 className="text-xl font-semibold">Seller Information</h2>
